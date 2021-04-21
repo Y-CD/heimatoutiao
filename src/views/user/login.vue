@@ -4,23 +4,77 @@
       <div class="close"><span class="iconfont iconicon-test"></span></div>
       <div class="logo"><span class="iconfont iconnew"></span></div>
       <div class="inputs">
-        <input placeholder="请输入手机号" class="input" /><input
-          placeholder="密码"
-          class="input"
+        <!-- 使用封装的输入框 -->
+        <!-- 使用v-model 会为子组件的value属性赋值 -->
+        <!-- v-model 会监听子组件所发出的input事件 -->
+        <hm_input
+          v-model="user.username"
+          placeholder="请输入用户名/手机号"
+          type="text"
+          :rules="/^1[356789]\d{9}$|^\w{3,6}$/"
+          msg="请输入正确的手机号或者用户名"
+        ></hm_input>
+        <hm_input
+          v-model="user.password"
+          placeholder="请输入密码"
           type="password"
-        />
+          :rules="/^\w{4,16}$/"
+          msg="请输入正确的密码"
+        ></hm_input>
       </div>
       <p class="tips">
         没有账号？
         <a href="#/register" class="">去注册</a>
       </p>
-      <div class="button">登录按钮</div>
+      <!-- 使用封装的按钮 -->
+      <hm_button @click="login" type="success">登陆</hm_button>
     </div>
   </div>
 </template>
 
 <script>
-export default {};
+// 引入封装的按钮
+import hm_button from "@/components/hm_button";
+import hm_input from "@/components/hm_input";
+import { userLogin } from "@/apis/user.js";
+export default {
+  // 注册
+  components: {
+    hm_button,
+    hm_input,
+  },
+  data() {
+    return {
+      user: {
+        username: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    login(e) {
+      if (
+        /^1[356789]\d{9}$|^\w{3,6}$/.test(this.user.username) &&
+        /^\w{4,16}$/.test(this.user.password)
+      ) {
+        userLogin(this.user)
+          .then((res) => {
+            // console.log(res);
+            if (res.data.message == "登录成功") {
+              this.$toast.success("登录成功");
+            } else {
+              this.$toast.fail("用户名或者密码不正确");
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      } else {
+        this.$toast.fail("用户名或者密码不合法");
+      }
+    },
+  },
+};
 </script>
 
 <style lang="less" scoped>
