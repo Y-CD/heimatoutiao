@@ -19,3 +19,11 @@ export const userRegister = (data) => {
         data
     })
 }
+
+export const getUserInfo = (id) => {
+    return axios({
+        url: `/user/${id}`,
+        // 设置请求头带token
+        // headers: { Authorization: localStorage.getItem('heimatoutiao_token') }
+    })
+}

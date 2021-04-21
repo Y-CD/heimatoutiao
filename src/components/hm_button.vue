@@ -3,7 +3,7 @@
     class="btn"
     @click="handlerClick"
     :class="{
-      danger: type === 'danger',
+      denger: type === 'denger',
       primary: type === 'primary',
       success: type === 'success',
     }"
@@ -40,8 +40,9 @@ export default {
   color: #000;
   font-weight: bold;
   font-size: 20px;
+  margin: 0 auto;
 }
-.danger {
+.denger {
   background-color: rgb(223, 24, 24);
   color: #fff;
 }

@@ -26,7 +26,7 @@
       有账号？
       <a href="#/login" class="">去登录</a>
     </p>
-    <hm_button type="danger" @click="register">注册</hm_button>
+    <hm_button type="primary" @click="register">注册</hm_button>
   </div>
 </template>
 

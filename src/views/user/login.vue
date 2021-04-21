@@ -62,6 +62,10 @@ export default {
             // console.log(res);
             if (res.data.message == "登录成功") {
               this.$toast.success("登录成功");
+              // 存储token值
+              localStorage.setItem("heimatoutiao_token", res.data.data.token);
+              // 跳转到个人中心页 需要传递id
+              this.$router.push({ path: `/personal/${res.data.data.user.id}` });
             } else {
               this.$toast.fail("用户名或者密码不正确");
             }
@@ -70,7 +74,7 @@ export default {
             console.log(err);
           });
       } else {
-        this.$toast.fail("用户名或者密码不合法");
+        this.$toast.fail("请输入用户名和密码");
       }
     },
   },
