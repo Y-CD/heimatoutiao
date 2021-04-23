@@ -11,7 +11,7 @@ export const userLogin = (data) => {
         data
     })
 }
-
+// 注册
 export const userRegister = (data) => {
     return axios({
         method: 'post',
@@ -19,11 +19,19 @@ export const userRegister = (data) => {
         data
     })
 }
-
+// 获取用户信息
 export const getUserInfo = (id) => {
     return axios({
         url: `/user/${id}`,
         // 设置请求头带token
         // headers: { Authorization: localStorage.getItem('heimatoutiao_token') }
+    })
+}
+// 更新用户信息
+export const updateUserInfo = (id, data) => {
+    return axios({
+        method: 'post',
+        url: `/user_update/${id}`,
+        data
     })
 }

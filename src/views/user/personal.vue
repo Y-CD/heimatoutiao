@@ -1,6 +1,6 @@
 <template>
   <div class="personal">
-    <router-link to="/edit_profile">
+    <router-link :to="'/edit_profile/' + id">
       <div class="profile">
         <img :src="userinfo.head_img" alt />
         <div class="profile-center">
@@ -43,19 +43,20 @@ export default {
   data() {
     return {
       userinfo: {},
+      id: "",
     };
   },
   mounted() {
     // console.log(this.$route);
-    let id = this.$route.params.id;
+    this.id = this.$route.params.id;
     // 页面一加载就获取用户数据
-    getUserInfo(id)
+    getUserInfo(this.id)
       .then((res) => {
         // console.log(res);
         this.userinfo = res.data.data;
         // 拼接图片的路径
         this.userinfo.head_img =
-          axios.defaults.baseURL + res.data.data.head_img;
+          axios.defaults.baseURL + this.userinfo.head_img;
       })
       .catch((err) => {
         console.log(err);

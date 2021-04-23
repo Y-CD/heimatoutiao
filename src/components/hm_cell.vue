@@ -36,6 +36,9 @@ export default {
   .right {
     font-size: 12px;
     color: #999;
+    > span {
+      vertical-align: middle;
+    }
   }
 }
 </style>
