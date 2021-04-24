@@ -8,7 +8,7 @@
       </template>
       <template #right>
         <!-- 使用vant框架的图标 -->
-        <van-icon name="wap-home-o" @click="$router.push({ name: 'index' })" />
+        <van-icon name="wap-home-o" @click="$router.push({ path: '/index' })" />
       </template>
     </hmheader>
     <div class="imgarea">

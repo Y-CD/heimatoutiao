@@ -8,9 +8,9 @@ import '@/styles/reset.less'
 import router from '@/router/index.js'
 
 // 引入vant组件
-import { Toast, Icon, Uploader, Dialog, Field, ActionSheet } from 'vant';
+import { Toast, Icon, Uploader, Dialog, Field, ActionSheet, Tab, Tabs, List, PullRefresh } from 'vant';
 
-Vue.use(Toast).use(Icon).use(Uploader).use(Dialog).use(Field).use(ActionSheet);
+Vue.use(Toast).use(Icon).use(Uploader).use(Dialog).use(Field).use(ActionSheet).use(Tab).use(Tabs).use(List).use(PullRefresh)
 
 Vue.config.productionTip = false
 
