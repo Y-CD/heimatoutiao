@@ -38,6 +38,11 @@ const router = new VueRouter({
             name: 'index',
             path: '/index',
             component: () => import('@/views/index.vue')
+        },
+        {
+            name: 'articleDetail',
+            path: '/articleDetail/:id',
+            component: () => import('@/views/post/articleDetail.vue')
         }
     ]
 })

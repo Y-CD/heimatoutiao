@@ -25,7 +25,7 @@ axios.interceptors.request.use(function (config) {
 axios.interceptors.response.use(function (response) {
     // console.log(response);
     // 对响应数据做点什么
-    if (response.data.message == '用户信息验证失败!') {
+    if (response.data.message == '用户信息验证失败!' || response.data.message == '用户信息验证失败') {
         Toast('用户信息验证失败!')
         location.href = '#/login'
     }

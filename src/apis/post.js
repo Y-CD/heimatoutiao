@@ -9,3 +9,24 @@ export const getPostlist = (params) => {
         params
     })
 }
+
+// 获取指定id文章的详情数据
+export const getPostDetail = (id) => {
+    return axios({
+        url: '/post/' + id
+    })
+}
+
+// 点赞文章
+export const likePost = (id) => {
+    return axios({
+        url: '/post_like/' + id
+    })
+}
+
+// 收藏文章
+export const listStar = (id) => {
+    return axios({
+        url: '/post_star/' + id
+    })
+}
