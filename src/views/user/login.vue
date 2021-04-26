@@ -64,6 +64,10 @@ export default {
               this.$toast.success("登录成功");
               // 存储token值
               localStorage.setItem("heimatoutiao_token", res.data.data.token);
+              localStorage.setItem(
+                "heimatoutiao_userid",
+                res.data.data.user.id
+              );
               // 判断 如果有参数传递过来 就跳转到参数的页面
               let redirect = window.location.href.split("=")[1];
               if (redirect) {

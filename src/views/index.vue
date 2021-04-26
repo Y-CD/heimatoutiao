@@ -9,7 +9,7 @@
         <van-icon name="search" />
         <span>搜索商品</span>
       </div>
-      <div class="user" @click="$router.push({ path: `/personal/` })">
+      <div class="user" @click="jump">
         <van-icon name="manager-o" />
       </div>
     </div>
@@ -134,6 +134,18 @@ export default {
       this.cateList[this.active].finished = false;
 
       this.getPost();
+    },
+    jump() {
+      // 拿到存储的用户的ID
+      let id = localStorage.getItem("heimatoutiao_userid");
+      // 判断，如果有id 就证明登陆了 直接跳转到个人中心页
+      if (id) {
+        this.$router.push({ path: `/personal/${id}` });
+      } else {
+        // 如果没有登陆 就跳转到登陆页面 先登陆
+        this.$toast("未登陆，请先登陆！");
+        this.$router.push({ name: "login" });
+      }
     },
   },
 };
