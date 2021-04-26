@@ -64,8 +64,16 @@ export default {
               this.$toast.success("登录成功");
               // 存储token值
               localStorage.setItem("heimatoutiao_token", res.data.data.token);
-              // 跳转到个人中心页 需要传递id
-              this.$router.push({ path: `/personal/${res.data.data.user.id}` });
+              // 判断 如果有参数传递过来 就跳转到参数的页面
+              let redirect = window.location.href.split("=")[1];
+              if (redirect) {
+                window.location.href = decodeURIComponent(redirect);
+              } else {
+                // 跳转到个人中心页 需要传递id
+                this.$router.push({
+                  path: `/personal/${res.data.data.user.id}`,
+                });
+              }
             } else {
               this.$toast.fail("用户名或者密码不正确");
             }
