@@ -38,7 +38,7 @@ export default {
     };
   },
   methods: {
-    // 收藏文章
+    // 收藏文章函数
     async starActive() {
       let res = await listStar(this.post.id);
       // console.log(res);

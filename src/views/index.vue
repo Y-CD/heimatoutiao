@@ -119,14 +119,14 @@ export default {
     },
     // 上拉加载数据
     onLoad() {
-      // 页码自增
+      // 当前栏目的页码自增
       this.cateList[this.active].pageIndex++;
-
+      // 重新发起请求获取下一页的数据
       this.getPost();
     },
     // 下拉刷新的函数
     onRefresh() {
-      // 修改页码值为 1
+      // 修改当前栏目的页码值为 1
       this.cateList[this.active].pageIndex = 1;
       // 先清空当前栏目的数组中的数据
       this.cateList[this.active].postList.length = 0;

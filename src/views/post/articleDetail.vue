@@ -67,7 +67,7 @@ export default {
     // console.log(this.$route.params.id);
     let id = this.$route.params.id;
     this.post = (await getPostDetail(id)).data.data;
-    console.log(this.post);
+    // console.log(this.post);
   },
   methods: {
     async followUserById() {
