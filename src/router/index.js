@@ -43,6 +43,11 @@ const router = new VueRouter({
             name: 'articleDetail',
             path: '/articleDetail/:id',
             component: () => import('@/views/post/articleDetail.vue')
+        },
+        {
+            name: 'myfollow',
+            path: '/myfollow',
+            component: () => import('@/views/user/myfollow.vue')
         }
     ]
 })

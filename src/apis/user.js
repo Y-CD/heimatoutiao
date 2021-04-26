@@ -44,9 +44,15 @@ export const followUser = (id) => {
 }
 
 // 取消关注用户
-
 export const unfollowUser = (id) => {
     return axios({
         url: '/user_unfollow/' + id
+    })
+}
+
+// 用户关注列表
+export const getUserFollow = () => {
+    return axios({
+        url: '/user_follows'
     })
 }
