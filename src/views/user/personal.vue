@@ -26,7 +26,11 @@
       @click.native="$router.push({ path: '/myfollow' })"
     ></hmcell>
     <hmcell title="我的跟帖" desc="跟帖/回复"></hmcell>
-    <hmcell title="我的收藏" desc="文章/视频"></hmcell>
+    <hmcell
+      title="我的收藏"
+      desc="文章/视频"
+      @click.native="$router.push({ name: 'mystar' })"
+    ></hmcell>
     <hmcell title="设置"></hmcell>
     <hmbutton type="denger" style="margin-top: 20px" @click="exit"
       >退出</hmbutton
