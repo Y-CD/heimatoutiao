@@ -74,8 +74,9 @@ const router = new VueRouter({
 
 // 添加导航守卫
 router.beforeEach((to, from, next) => {
-    let arr = ['personal', 'edit_profile']
+    let arr = ['personal']
     // console.log(to);
+    // console.log(from);
     // if (to.path.indexOf('/personal/') !== -1) {
     if (arr.indexOf(to.name) !== -1) {
         let token = localStorage.getItem('heimatoutiao_token');
@@ -85,7 +86,7 @@ router.beforeEach((to, from, next) => {
             // 提示
             Toast('未登陆,请先登陆!')
             // 跳转到登陆页面
-            next({ name: 'login' })
+            next({ name: "login", params: { url: from.name } })
         }
     } else {
         next()

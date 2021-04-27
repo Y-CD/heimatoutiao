@@ -75,7 +75,7 @@ export default {
   methods: {
     exit() {
       localStorage.removeItem("heimatoutiao_token");
-      this.$router.push({ name: "login" });
+      this.$router.push({ name: "index" });
     },
   },
 };

@@ -70,8 +70,12 @@ export default {
               );
               // 判断 如果有参数传递过来 就跳转到参数的页面
               let redirect = window.location.href.split("=")[1];
+              let url = this.$route.params.url;
+              // console.log(url);
               if (redirect) {
                 window.location.href = decodeURIComponent(redirect);
+              } else if (url) {
+                this.$router.push({ name: url });
               } else {
                 // 跳转到个人中心页 需要传递id
                 this.$router.push({
