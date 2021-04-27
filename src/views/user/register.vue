@@ -58,7 +58,7 @@ export default {
       ) {
         userRegister(this.user)
           .then((res) => {
-            console.log(res);
+            // console.log(res);
             if (res.data.message == "注册成功") {
               this.$toast.success("注册成功");
               // 注册成功跳转到登录页面

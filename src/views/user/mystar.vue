@@ -41,7 +41,7 @@ export default {
   async mounted() {
     // 页面加载获取收藏的文章的信息
     let res = await getUserStar();
-    console.log(res);
+    // console.log(res);
     this.starList = res.data.data;
   },
   methods: {
@@ -59,6 +59,6 @@ export default {
 <style lang="less" scoped>
 .delete-button {
   height: 70%;
-  margin: 25% 0 0 0;
+  margin: 30% 0 0 0;
 }
 </style>

@@ -34,5 +34,9 @@ export default {
   .right {
     font-size: 20px;
   }
+  .center {
+    font-size: 18px;
+    font-weight: 600;
+  }
 }
 </style>

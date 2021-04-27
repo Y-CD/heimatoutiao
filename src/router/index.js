@@ -53,6 +53,11 @@ const router = new VueRouter({
             name: 'mystar',
             path: '/mystar',
             component: () => import('@/views/user/mystar.vue')
+        },
+        {
+            name: 'comment',
+            path: '/comment/:id',
+            component: () => import('@/views/comment.vue')
         }
     ]
 })

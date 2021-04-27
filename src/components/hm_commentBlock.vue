@@ -4,7 +4,9 @@
       <input type="text" placeholder="写跟帖" @click="isFocus = !isFocus" />
       <span class="comment">
         <i class="iconfont iconpinglun-"></i>
-        <em>{{ post.comment_length }}</em>
+        <em @click="$router.push({ path: `/comment/${post.id}` })">{{
+          post.comment_length
+        }}</em>
       </span>
       <i
         class="iconfont iconshoucang"
@@ -14,28 +16,48 @@
       <i class="iconfont iconfenxiang"></i>
     </div>
     <div class="inputcomment" v-show="isFocus">
-      <textarea ref="commtext" rows="5" @blur="isFocus = false"></textarea>
+      <textarea ref="commtext" rows="5" v-model.trim="content"></textarea>
       <div>
-        <span>发 送</span>
-        <span @click="isFocus = !isFocus">取 消</span>
+        <span @click="sendComment">发 送</span>
+        <span @click="cancelReplay">取 消</span>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import { listStar } from "@/apis/post.js";
+import { listStar, publishComment } from "@/apis/post.js";
 export default {
   props: {
     post: {
       type: Object,
       required: true,
     },
+    // 接收父组件传递的文章评论列表的数据
+    commentObj: {
+      type: Object,
+      default: null,
+    },
   },
   data() {
     return {
       isFocus: false,
+      content: "",
     };
+  },
+  // 侦听器
+  watch: {
+    commentObj() {
+      // 判断 如果 commentObj 为null  this.isFocus = true;
+      if (this.commentObj) {
+        this.isFocus = true;
+        this.$nextTick(() => {
+          setTimeout(() => {
+            this.$refs.commtext.focus();
+          }, 10);
+        });
+      }
+    },
   },
   methods: {
     // 收藏文章函数
@@ -44,6 +66,36 @@ export default {
       // console.log(res);
       this.$toast.success(res.data.message);
       this.post.has_star = !this.post.has_star;
+    },
+    // 发表评论函数
+    async sendComment() {
+      if (this.content.length == 0) {
+        this.$toast.fail("请输入评论内容");
+        return;
+      }
+      let data = {
+        content: this.content,
+      };
+      // 判断是否有传递参数
+      if (this.commentObj) {
+        data.parent_id = this.commentObj.id;
+      }
+      let res = await publishComment(this.post.id, data);
+      // console.log(res);
+      // 1.给提示
+      this.$toast.success("发表评论成功");
+      // 2.隐藏输入框
+      this.isFocus = false;
+      // 3.清空之前输入的内容
+      this.content = "";
+      // 4.页面内容的刷新-子组件要告诉父组件进行列表数据的刷新
+      this.$emit("refresh");
+    },
+    // 取消回复评论
+    cancelReplay() {
+      this.isFocus = !this.isFocus;
+      // 发出事件
+      this.$emit("cancel");
     },
   },
 };
