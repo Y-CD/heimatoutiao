@@ -58,14 +58,26 @@ const router = new VueRouter({
             name: 'comment',
             path: '/comment/:id',
             component: () => import('@/views/comment.vue')
+        },
+        {
+            name: 'cateManager',
+            path: '/cateManager',
+            component: () => import('@/views/cateManager.vue')
+        },
+        {
+            name: 'search',
+            path: '/search',
+            component: () => import('@/views/search.vue')
         }
     ]
 })
 
 // 添加导航守卫
 router.beforeEach((to, from, next) => {
+    let arr = ['personal', 'edit_profile']
     // console.log(to);
-    if (to.path.indexOf('/personal/') !== -1) {
+    // if (to.path.indexOf('/personal/') !== -1) {
+    if (arr.indexOf(to.name) !== -1) {
         let token = localStorage.getItem('heimatoutiao_token');
         if (token) {
             next()

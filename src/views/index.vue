@@ -5,7 +5,7 @@
       <div class="logo">
         <span class="iconfont iconnew"></span>
       </div>
-      <div class="search" @click="$router.push({ name: 'Search' })">
+      <div class="search" @click="$router.push({ name: 'search' })">
         <van-icon name="search" />
         <span>搜索商品</span>
       </div>
@@ -60,10 +60,37 @@ export default {
     };
   },
   async mounted() {
-    // 获取到栏目的数据
-    let res = await getCateList();
-    // console.log(res);
-    this.cateList = res.data.data;
+    // 通过原生js 来实现点击跳转, 这里要使用箭头函数 防止this的指向改变
+    document.querySelector(".van-sticky").onclick = (e) => {
+      // console.log(e.target.className);
+      // 判断 如果点击后的类名 是 van-sticky 就证明点击的是伪元素的位置
+      if (e.target.className.indexOf("van-sticky") !== -1) {
+        // 跳转到栏目管理页面
+        this.$router.push({ name: "cateManager" });
+      }
+    };
+
+    // 读取本地存储的数据
+    this.cateList = JSON.parse(localStorage.getItem("cateList"));
+    // 判断 没有就向后台发起请求获取数据
+    if (!this.cateList) {
+      // 获取到栏目的数据
+      let res = await getCateList();
+      // console.log(res);
+      this.cateList = res.data.data;
+    } else {
+      // 本地有数据 判断是否登录
+      if (localStorage.getItem("heimatoutiao_token")) {
+        // 登录 就添加两条数据
+        this.cateList.unshift(
+          { id: 0, name: "关注", is_top: 1 },
+          { id: 999, name: "头条", is_top: 1 }
+        );
+      } else {
+        // 没有登录 就添加一条数据
+        this.cateList.unshift({ id: 999, name: "头条", is_top: 1 });
+      }
+    }
 
     // 数据的改造 增加一个数组 用来存储自己的新闻数据
     this.cateList = this.cateList.map((v) => {
@@ -181,6 +208,22 @@ export default {
       color: #fff;
       font-size: 30px;
     }
+  }
+}
+
+/deep/ .van-sticky {
+  padding-right: 50px;
+  &::after {
+    content: "+";
+    position: absolute;
+    width: 51px;
+    height: 44px;
+    background-color: #fff;
+    top: 0;
+    right: 0;
+    text-align: center;
+    line-height: 36px;
+    font-size: 35px;
   }
 }
 </style>
