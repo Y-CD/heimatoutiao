@@ -1,7 +1,9 @@
 <template>
   <div id="app">
     <div class="container">
-      <div class="close"><span class="iconfont iconicon-test"></span></div>
+      <div class="close">
+        <span class="iconfont iconicon-test" @click="close"></span>
+      </div>
       <div class="logo"><span class="iconfont iconnew"></span></div>
       <div class="inputs">
         <!-- 使用封装的输入框 -->
@@ -92,6 +94,12 @@ export default {
       } else {
         this.$toast.fail("请输入用户名和密码");
       }
+    },
+    // 点击关闭图标的处理函数
+    close() {
+      // console.log(1);
+      // 点击关闭图标 返回首页
+      this.$router.push({ name: "index" });
     },
   },
 };
